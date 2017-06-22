@@ -5,7 +5,7 @@ Magnics |version|
    :maxdepth: 2
    :caption: Contents:
 
-
+   example-notebook
 
 Indices and tables
 ==================
