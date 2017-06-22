@@ -6,5 +6,6 @@ dependencies:
   - pandoc
   - nbconvert
   - ipykernel
+  - fenics
   - pip:
     - nbsphinx
