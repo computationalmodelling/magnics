@@ -90,7 +90,7 @@ def rhs_micromagnetic(m_vector_array, t, counter=[0]):
 #m_init = fe.interpolate(fe.Constant((1, 0, 0)), V)
 m_init_const = fe.Constant((1, 0, 0))
 m_init = fe.interpolate(m_init_const, V)
-ts = np.linspace(0, 1e-11, 100)
+ts = np.linspace(0, 1e-12, 100)
 # empty call of time integrator, just to get FEniCS to cache all forms etc
 #rhs_micromagnetic(m_init.vector().array(), 0)
 
@@ -144,4 +144,6 @@ eps = 0.01
 #ref = 0.0655908475021   # for tmax = 1e-10
 ref = 0.0422068879247    # for tmax = 5e-11
 ref = 0.00765261606231   # for tmax = 1e-11
+ref = 8.980046112483375e-05 # for tmax = 1e-12
+eps = 1e-7
 assert ref - eps < max(abs(difference)) < ref + eps
