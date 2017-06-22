@@ -1,6 +1,6 @@
 # coding: utf-8
 
-
+import pylab
 import scipy.integrate
 import fenics as fe
 import numpy as np
@@ -124,18 +124,21 @@ def macrospin_analytic_solution(alpha, gamma, H, t_array):
 mx_analytic = macrospin_analytic_solution(alpha, gamma, Ms/2, ts)
 
 tmp2 = ms[:,0:1]  # might be m_x, m_y, m_z of first vector
-# pylab.plot(ts, tmp2, 'o-')
-# pylab.plot(ts, mx_analytic, 'x-')
-# pylab.legend(['simulation', 'analytical'])
-# pylab.xlabel('$t\,$[s]')
-# pylab.ylabel('$<M_x>$')
+pylab.plot(ts, tmp2, 'o-')
+pylab.plot(ts, mx_analytic, 'x-')
+pylab.legend(['simulation', 'analytical'])
+pylab.xlabel('$t\,$[s]')
+pylab.ylabel('$<M_x>$')
+pylab.savefig('plot1.pdf')
 
+pylab.clf()
 difference = tmp2[:,0] - mx_analytic
 print("max deviation: {}".format(max(abs(difference))))
-# pylab.plot(ts, difference, 'o-')
-# pylab.legend(['simulation - analytical'])
-# pylab.xlabel('$t\,$[s]')
-# pylab.ylabel('$<\Delta M_x>$')
+pylab.plot(ts, difference, 'o-')
+pylab.legend(['simulation - analytical'])
+pylab.xlabel('$t\,$[s]')
+pylab.ylabel('$<\Delta M_x>$')
+pylab.savefig('plot2.pdf')
 
 
 # add quick test
