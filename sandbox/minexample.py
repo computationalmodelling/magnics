@@ -5,17 +5,7 @@ import scipy.integrate
 import fenics as fe
 import numpy as np
 import matplotlib.pyplot as plt
-
-def setup_vectorspace(mesh):
-    """setup"""
-    V = fe.VectorFunctionSpace(mesh, "CG", 1, dim=3)
-    v = fe.TestFunction(V)
-    u = fe.TrialFunction(V)
-    m = fe.Function(V)
-    Heff = fe.Function(V)
-    return m, Heff, u, v, V
-
-
+import magnics
 
 # Material parameters
 Ms = 8.6e5  # saturation magnetisation (A/m)
@@ -47,7 +37,7 @@ p2 = fe.Point(d, d, thickness)
 mesh = fe.BoxMesh(p1, p2, nx, ny, nz)
 
 
-m, Heff, u, v, V = setup_vectorspace(mesh)
+m, Heff, u, v, V = magnics.vectorspace(mesh)
 
 
 
