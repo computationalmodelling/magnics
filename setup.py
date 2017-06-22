@@ -12,6 +12,7 @@ setuptools.setup(
     author="Leoni Breth, and Hans Fangohr",
     author_email="fangohr@soton.ac.uk",
     packages=setuptools.find_packages(),
+    python_requires=">=3.5",
     classifiers=["Development Status :: 3 - Alpha",
                  "License :: OSI Approved :: BSD License",
                  "Topic :: Scientific/Engineering :: Physics",
