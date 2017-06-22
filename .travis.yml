@@ -8,9 +8,10 @@ before_install:
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH=/home/travis/miniconda/bin:$PATH
 install:
-  - conda create -q -y -n magnics-test -c conda-forge python=$TRAVIS_PYTHON_VERSION fenics pytest
+  - conda create -q -y -n magnics-test -c conda-forge python=$TRAVIS_PYTHON_VERSION fenics pytest nbval
   - source activate magnics-test
 
 # command to run tests
 script:
   - py.test
+  - PYTHONPATH=$TRAVIS_BUILD_DIR py.test --nbval-lax docs/
