@@ -4,7 +4,6 @@ def test_minexample():
     import scipy.integrate
     import fenics as fe
     import numpy as np
-    import matplotlib.pyplot as plt
     import magnics
 
     # Material parameters
