@@ -49,6 +49,8 @@ mesh = fe.BoxMesh(p1, p2, nx, ny, nz)
 
 m, Heff, u, v, V = setup_vectorspace(mesh)
 
+
+
 def effective_field(m, volume=None):
     w_Zeeman = - mu0 * Ms * fe.dot(m, H)
     w_exchange = A  * fe.inner(fe.grad(m), fe.grad(m))
@@ -60,11 +62,16 @@ def effective_field(m, volume=None):
 # Effective field
 Heff_form = effective_field(m)
 
+
+
+
+
 # Preassemble projection Matrix
 Amat = fe.assemble(fe.dot(u, v)*fe.dx)
 
 LU = fe.LUSolver()
 LU.set_operator(Amat)
+
 
 
 def compute_dmdt(m):
@@ -90,13 +97,14 @@ def rhs_micromagnetic(m_vector_array, t, counter=[0]):
     dmdt = compute_dmdt(m)
     return dmdt
 
-m_init = fe.Constant((1, 0, 0))
-m = fe.interpolate(m_init, V)
+#m_init = fe.interpolate(fe.Constant((1, 0, 0)), V)
+m_init_const = fe.Constant((1, 0, 0))
+m_init = fe.interpolate(m_init_const, V)
 ts = np.linspace(0, 1e-11, 100)
 # empty call of time integrator, just to get FEniCS to cache all forms etc
-rhs_micromagnetic(m.vector().array(), 0)
+#rhs_micromagnetic(m_init.vector().array(), 0)
 
-ms = scipy.integrate.odeint(rhs_micromagnetic, y0=m.vector().array(), t=ts, rtol=1e-10, atol=1e-10)
+ms = scipy.integrate.odeint(rhs_micromagnetic, y0=m_init.vector().array(), t=ts, rtol=1e-10, atol=1e-10)
 
 
 def macrospin_analytic_solution(alpha, gamma, H, t_array):
